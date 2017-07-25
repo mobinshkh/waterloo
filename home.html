@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SIZMIC Technical Round</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">	
+	<style type="text/css">
+body{
+	margin:0px;
+	padding:0px;
+	background:#5F9EA0;
+	font-family: tahoma;
+}
+.wrap{
+	width:410px;
+	overflow: hidden;
+	margin: auto;
+	margin-top:130px;
+	background:#fff;
+	padding:20px;
+	border: 2px solid silver;
+	border-radius: 5px;
+}
+.wrap h2{
+	text-align: center;
+}
+.wrap input{
+	
+	width: 400px;
+	height: 30px;
+	border-radius: 8px;
+	border: 1px solid #4caf50;
+	margin: 10px;
+	padding:5px;
+	cursor: pointer;
+}
+	</style>
+</head>
+<body>	
+
+<div class='wrap'>
+	<form  method="POST">
+		<h2> Fetching Title </h2>	
+		Enter your Correct URL:<input type="url" name="urlnm" id="txt1" placeholder='Enter Correct url' required>	
+		<input type ="button" name="sub" value ="Display Title" onclick="fun()">
+	</form>
+	
+	<div id="load_img">
+		<img src="Loading_icon.gif">
+	</div>
+
+	<div id="div1">	
+	</div>
+</div>
+
+<script type="text/javascript">
+	document.getElementById("load_img").style.display = "none";
+	function fun()
+	{
+		document.getElementById('div1').style.display = "none";
+		document.getElementById("load_img").style.display = "block";
+		var my_url=document.getElementById('txt1').value;
+		//alert(my_url)
+		obj=new XMLHttpRequest()
+			obj.open('post','link.php?'+my_url, true)
+			obj.send();
+			obj.onreadystatechange=function()
+			{
+				if (obj.readyState==4) {
+					document.getElementById('div1').style.display = "block";
+					document.getElementById('div1').innerHTML=(obj.responseText);
+					document.getElementById("load_img").style.display = "none";
+				}
+        	//document.getElementById("div1").innerHTML = msg;
+            //alert('');
+        }  		
+	}
+</script>	
+</body>
+</html>
